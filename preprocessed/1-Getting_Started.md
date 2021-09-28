@@ -72,15 +72,22 @@ their default values.
 
 | Name | Default | Description |
 |---|---|---|
-| node_id | 0x3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29 | The public key of the account running this node. For standalone nodes this will also be the channel owner. |
-| channel_id | 0x0000000000000000000000000000000000000000000000000000000000000000 | The channel ID this node is assigned to. Used to choose which channel a node will join. Nodes will reject transactions with a different channel ID. |
-| data_dir | data | The directory to store persistent DB data. |
+| aot | true | set whether RothVM should use the AOT Compiler with Cranelift, if false instead uses an interpreted backend. |
+| block_expiration_range | 100 | max range for a transaction block expiration greater than the current block height. |
 | block_size | 0 | Max number of transactions to store in a block. When set to 0 no limit is applied to block size. |
+| channel_id | 0x0000000000000000000000000000000000000000000000000000000000000000 | The channel ID this node is assigned to. Used to choose which channel a node will join. Nodes will reject transactions with a different channel ID. |
+| channel_owner | 0x3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29 | hex string representing the unique id of the channel owner. |
 | ct_max_size | 500000000 | The maximum number of bytes in the body of an HTTP request. Must be large enough to support compiled contract updates. |
-| http_port | 8081 | The port used to listen for HTTP requests. |
-| check_nonce | true | Make sure that the account nonce is validated on transactions. In most cases this should not be changed. |
-| recover_panic | true | Allow the VM to recover from panics. This is expected behavior to recover from errors during execution and should only be turned off for debugging purposes. |
+| data_dir | data | The directory to store persistent DB data. |
 | debug | false | Enable debug logging on a node. |
+| debug_api | true | Enable the debug api for the http server. |
+| http_port | 8081 | The port used to listen for HTTP requests. |
+| log_output | "" | File location to write contract log output, empty for stderr. |
+| mem_kv | false | Whether to use an in memory kvstore for persistence or not. |
+| node_id | "" | Hex string representing the unique id of the node. |
+| pprof_addr | 127.0.0.1 | HTTP server address for pprof. |
+| pprof_port | 0 | port for pprof server, default 0 to disable. |
+| subscription_api | true | Enable the subscription api for the http server. |
 
 ### Standalone
 
