@@ -134,23 +134,9 @@ mazzaroth-cli contract-update [options] <val>
 
 Where `<val>` is the path to a file containing the wasm bytes. You will also
 need to provide `[options]` including the host (`-h`) where the node is
-listening, your private key (`-k`) to allow
+listening and your private key (`-k`) to allow
 [Mazzaroth-CLI](https://www.npmjs.com/package/mazzaroth-cli) to sign your
-transaction, and your account nonce (`-n`).
-
-Account nonces are used as a way to prevent duplicate transactions.
-Transactions must have a nonce that matches the expected nonce of the account
-in state. Every new account starts with a nonce of 0 and every accepted
-transaction increments this value by 1. If you do not know the nonce of your
-account you can request it from the node by running a
-[Mazzaroth-CLI](https://www.npmjs.com/package/mazzaroth-cli) command with your
-public key.
-
-Example:
-
-```Bash
-mazzaroth-cli nonce-lookup 3a547668e859fb7b112a1e2dd7efcb739176ab8cfd1d9f224847fce362ebd99c
-```
+transaction.
 
 An example using the config default values and running
 [Mazzaroth-CLI](https://www.npmjs.com/package/mazzaroth-cli) from the local machine:
