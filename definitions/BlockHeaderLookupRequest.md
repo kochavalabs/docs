@@ -2,6 +2,6 @@
 
 | Field | Value |
 |-------|-------|
-| ID | object: The [Identifier Object](#Identifier-Object). |
+| identifier | object: The [Identifier Object](#Identifier-Object). |
 
 !INCLUDE "Identifier.md"

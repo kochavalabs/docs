@@ -1,6 +1,6 @@
 # docs
 
-The latest documentation can be found in the v0.0.1 directory.
+The latest documentation can be found in the v0.4.2 directory.
 
 ## Markdown preprocessor
 

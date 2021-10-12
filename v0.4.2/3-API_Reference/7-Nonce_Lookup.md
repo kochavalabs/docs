@@ -14,7 +14,11 @@ Request Body Schema: XDR
 Encoding: base64  
 Object: AccountNonceLookupRequest
 
-!INCLUDE "definitions/AccountNonceLookupRequest.md", 2
+### AccountNonceLookupRequest Object
+
+| Field | Value |
+|-------|-------|
+| account | object: string: The 64 character hex representation of a 32 byte Ed25519 public key of the account to lookup nonce for. |
 
 ## Responses
 
@@ -24,7 +28,21 @@ Response Schema: XDR
 Encoding: base64  
 Object: AccountNonceLookupResponse
 
-!INCLUDE "definitions/AccountNonceLookupResponse.md", 3
+#### AccountNonceLookupResponse Object
+
+| Field | Value |
+|-------|-------|
+| nonce | string: The account nonce number used to enforce ordering of transactions. Starts at 0 and increments for each transaction accepted from this account. Transaction Submit from this account must match this nonce to be validated. |
+| stateStatus | object: The [StateStatus Object](#StateStatus-Object). |
+| status | integer: The enum result of the nonce lookup (0 = Unknown, 1 = Found, 2 = Not Found)  |
+| statusInfo | string: The readable string status stating the result of the transaction submit. |
+
+#### StateStatus Object
+
+| Field | Value |
+|-------|-------|
+| previousBlock | string: The last committed block number. |
+| transactionCount | string: The number of transactions in the current block.
 
 ### 400 Bad Request
 
