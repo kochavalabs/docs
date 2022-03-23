@@ -9,4 +9,4 @@
 | txReceiptRoot | string: The 64 character hex hash receipt merkle root. |
 | stateRoot | string: The 64 character hex hash of the state DB root. |
 | previousHeader | string: The 64 character hex hash of the previous block header. |
-| blockProducerAddress | string: The 64 character hex ID of the Consensus leader that produced the block. |
+| status | integer: The enum status of the block (0 = Unknown, 3 = Pending, 4 = Finalized) |

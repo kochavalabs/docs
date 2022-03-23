@@ -1,6 +1,6 @@
 .PHONY: all lint
 
-VERSION = "v0.4.2"
+VERSION = "v0.8.0"
 
 PROCESS_INPUTS = $(shell find ./preprocessed/ -type f -name '*.md')
 
