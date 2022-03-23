@@ -2,7 +2,7 @@
 
 Get the receipt for a specific transaction by providing the Transaction ID.
 
-- /v1/channels/{channelID}/receipts/{transactionID}
+- /v1/channels/{channelID}/receipts
 
 ## Get Receipt
 
