@@ -23,8 +23,6 @@ On success, the response depends on if the Transaction was a WRITE or READ.
 Content-Type: application/json  
 Body: Transaction ID
 
-!INCLUDE "definitions/Receipt.md", 3
-
 - 200 OK - Read Transaction
 
 Content-Type: application/json  
