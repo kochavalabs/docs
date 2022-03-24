@@ -19,10 +19,10 @@ In order to use the `Deploy` and `Run` features you must be running a Mazzaroth
 Node locally or have the address of a node that you can interact with.
 
 With Docker you can start a Mazzaroth Standalone Node for testing. Use the following
-command to start a Standalone node with port 8081 open for HTTP Access.
+command to start a Standalone node with port 6299 open for HTTP Access.
 
 ```Bash
-docker run -p 8081:8081 kochavalabs/mazzaroth:latest start standalone
+docker run -p 6299:6299 kochavalabs/mazzaroth:latest node start standalone
 ```
 
 With a Node running you may use the `Deploy` button to send a Contract Update Transaction

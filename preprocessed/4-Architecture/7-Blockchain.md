@@ -28,7 +28,7 @@ A transaction is created by a user and is signed by their account or an authoriz
 account for the sender of the transaction.
 
 The transactions are submitted to a Readonly Node in the targeted network using the
-`/transaction/submit` RPC API endpoint.
+`transactions` RPC API endpoint.
 
 The Readonly Node performs some basic validation, such as checking that the Transaction
 is properly signed and includes the proper channel ID. If the Validation succeeds
@@ -46,7 +46,7 @@ Readonly Nodes that receive transactions from Consensus will queue the transacti
 to ensure that they are executed in the correct order. Once they have the next transactions
 to execute they will execute them and update their own ledgers.
 
-A user can use the `/transaction/lookup` API with the Transaction ID to check if
+A user can use the `transactions` API with the Transaction ID to check if
 a transaction has been finalized.
 
 ## Ledger
@@ -84,115 +84,40 @@ descriptions stored in a Transaction Object.
 
 !INCLUDE "definitions/Transaction.md", 3
 
-#### Authentication
-
-Signing is used throughout the system to ensure three properties about a message:
-integrity, authentication, non-repudiation. In short, a cryptographic signing
-algorithm can give you guarantees that a message is from a particular person
-and has not been tampered with.
-
-Although we used signing in multiple places, a practical example of this is
-with the signing of transactions. Every user of the Mazzaroth system will need
-to generate a cryptographic key pair to identify themselves to the system.
-The public key for this pair will be their account ID. Transactions submitted
-to the Mazzaroth system must be signed by the sender using their account key pair.
-
-Since the private key is used to prove your identity for authentication
-it is very important to keep this key safe.
-
-Authentication comes from the signature on a transaction. The action data on a
-transaction must be signed by the private key or a [permissioned](#Permissioning)
-key for the sender of the transactions.
-
 #### Contract
 
 Transactions may also be used to update the Contract state of a channel. A
 channel can only have one contract that defines the functions available. The
-contract is set by the owner through a Contract Update Transaction. See the
-[Update Object](#Update-Object) above for an example of how this field can be
+contract is set by the owner through a Deploy Transaction. See the
+[Contract Object](#Contract-Object) above for an example of how this field can be
 set on a transaction.
 
-Example Contract Update Transaction JSON:
+Example Deploy Transaction JSON:
 
 ```JSON
 {
-    "transaction": {
-        "signature": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        "signer": {},
-        "action": {
-            "address": "0000000000000000000000000000000000000000000000000000000000000000",
-            "channelID": "0000000000000000000000000000000000000000000000000000000000000000",
-            "nonce": "0",
-            "category": {
-                "enum": 2,
-                "value": {
-                    "enum": 1,
-                    "value": {
-                        "contractBytes": "contract bytes",
-                        "contractHash": "0000000000000000000000000000000000000000000000000000000000000000",
-                        "version": "1.0.0"
-                    }
-                }
-            }
-        }
-    }
+ "sender": "3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29",
+ "signature": "41673b6ca7d17463a722ce6c2b9c0e5f68bf6f4d085530476c60341e11eb926305ea9730884a7807faf2484a5e6e8cef566479eea21628fcb3da2f48ab235bf3",
+ "data": {
+  "channelID": "0000000000000000000000000000000000000000000000000000000000000000",
+  "nonce": "5304039207213195818",
+  "blockExpirationNumber": "100",
+  "category": {
+   "type": 2,
+   "data": {
+    "version": "0.0.1",
+    "owner": "3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29",
+    "abi": {
+     "version": "0.8.0",
+     "functions": [],
+    },
+    "contractHash": "6f5a561f67c1e874140ef682914e616a422fd336b67576709738876ca37080d1",
+    "contractBytes": "contract bytes"
+   }
+  }
+ }
 }
 ```
-
-#### Permissioning
-
-There are some instances when you may want a third party to act on your behalf
-without giving out your private key. To allow this Mazzaroth includes a
-permissioning feature that allows special transactions to Grant and Revoke
-access to addresses to sign transactions on a user's behalf.
-
-Once an address has been granted permission for another address it is added
-to the `permissioned_keys` account object in state for a channel.
-
-To grant an address access to sign transactions you must submit a
-[Permission](#Permission-Object) type Transaction with the `GRANT` Permission action.
-Access can be revoked for an address by submitting a
-[Permission](#Permission-Object) type Transaction with the `REVOKE` Permission action.
-
-Example Permission Update Transaction JSON:
-
-```JSON
-{
-    "transaction": {
-        "signature": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        "signer": {},
-        "action": {
-            "address": "0000000000000000000000000000000000000000000000000000000000000000",
-            "channelID": "0000000000000000000000000000000000000000000000000000000000000000",
-            "nonce": "0",
-            "category": {
-                "enum": 2,
-                "value": {
-                    "enum": 3,
-                    "value": {
-                        "key": "0000000000000000000000000000000000000000000000000000000000000001",
-                        "action": 1
-                    }
-                }
-            }
-        }
-    }
-}
-```
-
-#### Account
-
-See XDR definition [here](https://github.com/kochavalabs/mazzaroth-xdr/blob/master/idl/account.x).
-
-Users of Mazzaroth are identified by their public key. This key ties to an
-[Account Object](#Account-Object) in the channel. Every Transaction that
-is sent to the blockchain must contain a public key in the `address` field of the
-[Action Object](#Action-Object), which identifies the account that is sending the
-transaction. It is possible that a different key is used to sign the transaction
-using the [Permissioning](#Permissioning) feature, but the address is still used
-to identify the sender of a transaction.
-
-!INCLUDE "definitions/Account.md", 3
 
 ### Receipts
 
@@ -217,18 +142,6 @@ State DB is stored in block headers when blocks are finalized.
 There are a number of different items that are stored in the StateDB including Accounts,
 the Contract binary, the Channel Config, and general Contract State.
 
-### Account State
-
-The accounts that submit transactions to a channel will be stored in the State DB.
-See [Account](#Account) above for more information on what an Account is in Mazzaroth.
-Accounts are stored by the Public Key used to submit transactions. So accounts
-may be looked up by anyone that knows the public key, but it only provides the
-information stored in the account object. This is useful for things like looking
-up the account nonce for an ID. Every transaction, unless it is Readonly,
-that gets executed will, at the very least, update the account nonce of the sender.
-This means that the state root will always change after a successful execution,
-even if the contract function called does not affect state.
-
 ### Contract State
 
 The Contract itself is stored in state along with its version number. The
@@ -238,10 +151,3 @@ updates state. This is useful as a way to know that nodes have the exact same
 copy of the contract, because if a different contract was stored in a node's state
 it would have a different state root value. See the [Contract Object](#Contract-Object)
 above for more information on the fields within the Contract Object.
-
-### Channel Config State
-
-The Channel Config object that is used to define a channel is stored in state.
-A transaction from the owner, or admins, of the channel is required to update
-the channel config. See [Channel Config Object](#Channel-Config-Object) above
-for more information on the fields within the Channel Config Object.

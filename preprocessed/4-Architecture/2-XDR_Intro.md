@@ -55,5 +55,5 @@ console.log(outData) // {"my":"data","is":"ambiguous"}
 XDR largely circumvents these ambiguities (union types with default arms being
 an exception that we avoid.) We provide [tooling](https://github.com/kochavalabs/xdr-codegen)
 that facilitates working in either rust, javascript or golang. We use XDR for
-all of our shared datatypes, including the [Mazzaroth-XDR](https://github.com/kochavalabs/mazzaroth-xdr)
+all of our shared data types, including the [Mazzaroth-XDR](https://github.com/kochavalabs/mazzaroth-xdr)
 which defines the core Mazzaroth data structures.

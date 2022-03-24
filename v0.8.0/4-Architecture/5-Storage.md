@@ -115,28 +115,6 @@ to the channel.
 Key collisions are prevented by using a reserved set of prefixes and unique keys
 for data within the State Database.
 
-#### Account Prefix
-
-The Account prefix is `[]byte("a_")` and is used to prefix all account keys stored
-in the StateDB.
-
-For example, the account for address `3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29`
-would be stored at the key by combining the account prefix with the previous byte
-ID. See Account object definition below.
-
-
-#### Channel Config Key
-
-The Channel Config key is `[]byte("c_")` and is used to store the Channel Config
-object.  See Channel Config object definition below.
-
-##### Channel Config Object
-
-| Field | Value |
-|-------|-------|
-| owner | string: The 64 character hex representation of a 32 byte Ed25519 public key of the owner for this channel. |
-| admins | array of strings: A list of IDs (64 character hex public keys), for admin accounts of this channel. Gives these IDs additional privileges such as ability to update the config and deploy contract versions. |
-
 #### Contract Key
 
 The Contract Key is `[]byte("d_")` and is used to store the Contract as bytes.

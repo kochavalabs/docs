@@ -17,7 +17,7 @@ docker pull kochavalabs/mazzaroth
 If you would like to specify a specific version of Mazzaroth include the tag, i.e:
 
 ```Bash
-docker pull kochavalabs/mazzaroth:0.2.0
+docker pull kochavalabs/mazzaroth:0.8.0
 ```
 
 You can find a list of the current image tags on [Docker Hub](https://hub.docker.com/r/kochavalabs/mazzaroth/tags).
@@ -42,12 +42,14 @@ Usage:
   mazzaroth [command]
 
 Available Commands:
+  completion  Generate the autocompletion script for the specified shell
   help        Help about any command
-  start       Start the Mazzaroth RPC Server.
+  node        mazzaroth node resource
+  recover     Recovery utilities to retrieve data from persistent storage without starting a node.
 
 Flags:
-      --config string   config file (default is config.yaml)
-  -h, --help            help for mazzaroth
+      --cfg-path string   config file (default is config.yaml)
+  -h, --help              help for mazzaroth
 
 Use "mazzaroth [command] --help" for more information about a command.
 ```
@@ -57,7 +59,7 @@ For example, to get a listing of all of the available flags and descriptions for
 the Mazzaroth start standalone command use:
 
 ```Bash
-docker run kochavalabs/mazzaroth start standalone --help
+docker run kochavalabs/mazzaroth node start standalone --help
 ```
 
 There are a couple of options you will likely want to provide to the run command.
@@ -68,19 +70,19 @@ Examples are provided below.
 At the very least, to interact with a node you will want to expose the http port.
 This can be done by using the [-p option](https://docs.docker.com/engine/reference/commandline/run/#publish-or-expose-port--p---expose)
 with the docker run command.
-The default http port is 8081, but this can be changed by providing a flag to the
+The default http port is 6299, but this can be changed by providing a flag to the
 Mazzaroth command itself.
 
-Using the default value with 8081 exposed:
+Using the default value with 6299 exposed:
 
 ```Bash
-docker run -p 8081:8081 kochavalabs/mazzaroth start standalone
+docker run -p 6299:6299 kochavalabs/mazzaroth node start standalone
 ```
 
 Providing a configured http port:
 
 ```Bash
-docker run -p 8082:8082 kochavalabs/mazzaroth start standalone --http_port 8082
+docker run -p 6300:6300 kochavalabs/mazzaroth node start standalone --http_port 6300
 ```
 
 ### Mounting the Data Directory
@@ -101,5 +103,5 @@ directory in the container's filesystem.
 Example:
 
 ```Bash
-docker run -p 8081:8081 --mount type=bind,src=/data,dst=/data kochavalabs/mazzaroth start standalone
+docker run -p 6299:6299 --mount type=bind,src=/data,dst=/data kochavalabs/mazzaroth node start standalone
 ```

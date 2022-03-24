@@ -3,30 +3,6 @@
 Mazzaroth uses various data structures to organize and store information.
 Some of these are described below.
 
-## Account
-
-Every user of the Mazzaroth system will need to generate a cryptographic key pair
-to identify themselves to the system. The public key for this pair will be the
-account ID. All transactions submitted to the Mazzaroth system must be signed
-by the sender using their account key pair. The account ID also links to an
-account object in the Contract State DB. This object stores information about
-the account, such as the account Nonce and a list of permissioned keys
-authorized to sign transactions on behalf of that account.
-
-- [account xdr reference](https://github.com/kochavalabs/mazzaroth-xdr/blob/master/idl/account.x)
-
-### Account JSON Example
-
-```JSON
-{
-    "name" : "Jeff",
-    "nonce" : "3",
-    "permissionedKeys" : ["0000000000000000000000000000000000000000000000000000000000000000"]
-}
-```
-
-!INCLUDE "definitions/Account.md", 2
-
 ## Channels
 
 Mazzaroth uses channels to separate networks that are running Mazzaroth nodes.
@@ -41,25 +17,6 @@ to be played on multiple channels with the same data.
 It is possible to start a private cluster of nodes to create a private channel
 by starting all nodes with the same channel ID. More support for channels including
 cross-channel communication and channel registration is currently under development.
-
-### Channel Config
-
-Each channel is created with a Channel Config and the Channel Config object is
-used to store information about the channel. The Channel Config can only be
-changed by the channel owner or authorized admins but it may be retrieved by
-anyone from a node using the RPC API.
-
-#### Channel Config JSON Example
-
-```JSON
-{
-    "owner" : "3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29",
-    "channelName" : "Mazzaroth",
-    "admins" : ["0000000000000000000000000000000000000000000000000000000000000000"]
-}
-```
-
-!INCLUDE "definitions/ChannelConfig.md", 3
 
 ## Consensus
 

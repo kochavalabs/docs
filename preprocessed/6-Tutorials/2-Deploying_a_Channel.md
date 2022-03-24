@@ -36,155 +36,107 @@ Documentation will be updated when these are made available.
 
 To run a standalone node you can use the Mazzaroth docker image.
 The command to run a standalone node with mounted data directory
-and exposed http port 8081 is provided below.
+and exposed http port 6299 is provided below.
 
 ```Bash
-docker run -p 8081:8081 --mount type=bind,src=/data,dst=/data kochavalabs/mazzaroth:latest start standalone
+docker run -p 6299:6299 --mount type=bind,src=/data,dst=/data kochavalabs/mazzaroth:latest node start standalone
 ```
 
 Things to note if using the default config values are that the standalone node will
-be using the default channel ID of "0x0000000000000000000000000000000000000000000000000000000000000000"
-and the default channel_owner ID of "0x3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29".
-The channel_owner ID is the public key that matches the private key of "0x0000000000000000000000000000000000000000000000000000000000000000".
+be using the default channel ID of "0000000000000000000000000000000000000000000000000000000000000000".
 
-If you would like to use your own keys and a different channel id these
+If you would like to use a different channel id this
 can be provided as command line arguments to the start standalone command.
 
 Example:
 
 ```Bash
-docker run -p 8081:8081 --mount type=bind,src=/data,dst=/data kochavalabs/mazzaroth:latest start standalone --channel_id 0x0000000000000000000000000000000000000000000000000000000000000000 --channel_owner 0x3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29
-```
-
-## Configure Nodes
-
-Once you have a Readonly or Standalone node running to target you will
-first need to update the channel config.
-
-The Channel Config can be set on a new Node by submitting a
-Config type Update Transaction.
-
-The JSON of a Config Update Transaction looks like this:
-
-```JSON
-{
-    "transaction": {
-        "signature": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        "signer": {
-            "enum": 0
-        },
-        "action": {
-            "address": "0000000000000000000000000000000000000000000000000000000000000000",
-            "channelID": "0000000000000000000000000000000000000000000000000000000000000000",
-            "nonce": "0",
-            "category": {
-                "enum": 2,
-                "value": {
-                    "enum": 2,
-                    "value": {
-                        "owner": "0000000000000000000000000000000000000000000000000000000000000000",
-                        "channelName": "string",
-                        "admins": []
-                    }
-                }
-            }
-        }
-    }
-}
+docker run -p 6299:6299 --mount type=bind,src=/data,dst=/data kochavalabs/mazzaroth:latest start standalone --channel_id 0000000000000000000000000000000000000000000000000000000000000000
 ```
 
 ## Upload a Contract
 
-Once the Channel Config has been set you may upload
-a contract to the channel by submitting a Contract type Update Transaction.
+Once you have a Readonly or Standalone node running you may upload
+a contract to the channel by submitting a Deploy type Transaction.
 
-This transaction includes the WebAssembly contract bytes and initializes the
-Mazzaroth Virtual Machine (RothVM) for the nodes running the channel.
+This transaction includes the WebAssembly contract bytes and ABI and initializes
+the Mazzaroth Virtual Machine (RothVM) for the nodes running the channel.
 
-The JSON for a Contract Update Transaction looks like this:
+The JSON for a Deploy Transaction looks like this:
 
 ```JSON
 {
-    "transaction": {
-        "signature": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        "signer": {},
-        "action": {
-            "address": "0000000000000000000000000000000000000000000000000000000000000000",
-            "channelID": "0000000000000000000000000000000000000000000000000000000000000000",
-            "nonce": "0",
-            "category": {
-                "enum": 2,
-                "value": {
-                    "enum": 1,
-                    "value": {
-                        "contractBytes": "base64",
-                        "contractHash": "0000000000000000000000000000000000000000000000000000000000000000",
-                        "version": "string"
-                    }
-                }
-            }
-        }
-    }
+ "sender": "3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29",
+ "signature": "41673b6ca7d17463a722ce6c2b9c0e5f68bf6f4d085530476c60341e11eb926305ea9730884a7807faf2484a5e6e8cef566479eea21628fcb3da2f48ab235bf3",
+ "data": {
+  "channelID": "0000000000000000000000000000000000000000000000000000000000000000",
+  "nonce": "5304039207213195818",
+  "blockExpirationNumber": "100",
+  "category": {
+   "type": 2,
+   "data": {
+    "version": "0.0.1",
+    "owner": "3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29",
+    "abi": {
+     "version": "0.8.0",
+     "functions": [],
+    },
+    "contractHash": "6f5a561f67c1e874140ef682914e616a422fd336b67576709738876ca37080d1",
+    "contractBytes": "contract bytes"
+   }
+  }
+ }
 }
 ```
 
 For more info about how to write and deploy a contract check out the
-[Writing a Contract](https://mazzaroth.io/docs/7-Tutorials/2-Writing_a_Contract.md)
+[Writing a Contract](https://mazzaroth.io/docs/6-Tutorials/3-Writing_a_Contract.md)
 tutorial.
 
-## Mazzaroth CLI
+## Mazzaroth Command Line Tool: m8
 
-To help combine the processes of deploying the channel config to create a channel
-and updating the channel with a contract, [mazzaroth-cli](https://github.com/kochavalabs/mazzaroth-cli)
+To help with deploying a contract, [m8](https://github.com/kochavalabs/mazzaroth-cli)
 includes a deploy command.
 
 Example:
 
 ```Bash
-mazzaroth-cli deploy deploy.json
+m8 channel exec deployment --deployment-manifest deploy.yaml
 ```
 
-This command takes a JSON config file which should include the fields of the
-channel config, the abi file, the contract wasm binary, and optional initial
+This command takes a YAML config file which should include the fields of the
+channel configuration, the abi file, the contract wasm binary, and optional initial
 transactions to execute on the contract. The config fields are described below.
 
 | Config | Description |
 | ------- | ----------- |
-| abi | Contract abi.json. Can be of type file (specify a json file) or config where you put the raw abi in the config value |
-| channel-id | The channel ID as 64 character hex string. Default: "0".repeat(64) |
-| channel-name | The channel name as a readable string. Default: "" |
-| contract-version | The contract version to set in the contract update. Default: "0.1" |
-| contract | Path to the contract wasm file. |
-| host | Web address for the mazzaroth node. Default: localhost:8081 |
-| owner | ID of the owner to use for the config and contract update transactions. Default: "3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29" |
-| init-transactions | A series of named initial transactions to execute, each test set starts with a fresh mazzaroth node with no state and runs the specified transactions. |
-| init-transactions.args | Arguments to be sent to the function. Translated directly to transaction parameters |
-| init-transactions.function_name | Name of the contract function to call. |
-| init-transactions.sender | Account to send the transaction as, 64 character hex string. Default: "0".repeat(64) |
-| xdr-types | Path to the XDR type js file if any custom types are being used. |
+| channel.abi-file | Contract abi.json location. |
+| channel.id | The channel ID as 64 character hex string. |
+| channel.name | The channel name as a readable string. |
+| channel.version | The contract version to set in the contract deploy. |
+| channel.contract-file | Path to the contract wasm file. |
+| channel.address | Web address for the mazzaroth node. |
+| channel.owner | ID of the owner of the contract. |
+| channel.transactions | A series of named initial transactions to execute after deploy. |
+| channel.transactions.tx.args | Arguments to be sent to the function. Translated directly to transaction parameters |
+| channel.transactions.tx.function | Name of the contract function to call. |
 
 Example deploy.json:
 
-```JSON
-{
-    "abi": {
-        "type": "file",
-        "value": "./contract/target/json/ExampleContract.json"
-    },
-    "channel-id": "0000000000000000000000000000000000000000000000000000000000000000",
-    "channel-name": "Example Channel",
-    "contract": "./contract/target/wasm32-unknown-unknown/release/contract.wasm",
-    "host": "http://localhost:8081",
-    "owner": "3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29",
-    "init-transactions": {
-        "products-add-get": [
-            {
-                "args": [],
-                "function_name": "setup",
-                "sender": ""
-            }
-        ]
-    },
-    "xdr-types": "./xdrTypes.js"
-}
+```YAML
+version: 0.0.1
+type: deployment
+channel:
+  version: 0.0.1
+  id: 0000000000000000000000000000000000000000000000000000000000000000
+  owner: 3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29
+  contract-file: "./contract/target/wasm32-unknown-unknown/release/contract.wasm"
+  abi-file: "./contract/target/json/ExampleContract.json"
+gateway-node:
+  address: http://localhost:6299
+deploy:
+  name: example-contract
+  transactions:
+    - tx:
+        function: "setup"
 ```
