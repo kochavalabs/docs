@@ -1,4 +1,4 @@
-# Action Object
+# Data Object
 
 | Field | Value |
 |-------|-------|
