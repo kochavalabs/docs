@@ -8,7 +8,7 @@ Lookup information about the channel, including the ABI or Contract binary.
 
 ### Contract Request
 
-GET: /v1/channels/{channelID}/contract
+GET: /v1/channels/{channelID}/contract  
 Content-Type: application/json  
 
 ### Contract Responses

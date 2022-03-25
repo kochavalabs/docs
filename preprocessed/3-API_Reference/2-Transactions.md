@@ -8,7 +8,7 @@ Submit a Transaction to a node or lookup transactions.
 
 ### Submit Request
 
-POST: /v1/channels/{channelID}/transactions
+POST: /v1/channels/{channelID}/transactions  
 Content-Type: application/json  
 Body: Transaction
 
