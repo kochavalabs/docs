@@ -108,7 +108,7 @@ descriptions stored in a Transaction Object.
 | sender | string: The 64 character hex representation of a 32 byte Ed25519 public key of the sender for the transaction. |
 | data | object: The [Data Object](#Data-Object). |
 
-#### Action Object
+#### Data Object
 
 | Field | Value |
 |-------|-------|

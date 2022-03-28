@@ -8,7 +8,7 @@ Submit a Transaction to a node or lookup transactions.
 
 ### Submit Request
 
-POST: /v1/channels/{channelID}/transactions
+POST: /v1/channels/{channelID}/transactions  
 Content-Type: application/json  
 Body: Transaction
 
@@ -20,7 +20,7 @@ Body: Transaction
 | sender | string: The 64 character hex representation of a 32 byte Ed25519 public key of the sender for the transaction. |
 | data | object: The [Data Object](#Data-Object). |
 
-#### Action Object
+#### Data Object
 
 | Field | Value |
 |-------|-------|
@@ -111,7 +111,7 @@ Body: Transaction
 | sender | string: The 64 character hex representation of a 32 byte Ed25519 public key of the sender for the transaction. |
 | data | object: The [Data Object](#Data-Object). |
 
-#### Action Object
+#### Data Object
 
 | Field | Value |
 |-------|-------|

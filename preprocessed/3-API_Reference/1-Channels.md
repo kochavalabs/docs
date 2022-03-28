@@ -33,7 +33,7 @@ Returned if there is a server error handling the request.
 
 ### ABI Request
 
-GET: /v1/channels/{channelID}/abi
+GET: /v1/channels/{channelID}/abi  
 Content-Type: application/json  
 
 ### ABI Responses
