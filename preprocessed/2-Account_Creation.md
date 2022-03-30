@@ -1,3 +1,8 @@
+---
+sidebar_label: "Account Creation"
+sidebar_position: 2
+---
+
 # Creating Mazzaroth Accounts
 
 All transactions that are submitted to the network will be signed by a private
