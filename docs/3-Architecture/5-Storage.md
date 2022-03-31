@@ -1,3 +1,5 @@
+import ApiSchema from '@theme/ApiSchema';
+
 # Storage
 
 Data is stored by Mazzaroth in a couple of ways. The Mazzaroth Ledger
@@ -65,18 +67,7 @@ efficient and secure verification of the data that it stores.
 For an example of how this is used in Mazzaroth take a look at the fields of a
 Block Header.
 
-### Block Header Object
-
-| Field | Value |
-|-------|-------|
-| blockHeight | string: The height of this block in the ledger, which starts at block height 0. |
-| transactionHeight | string: The highest transaction number stored in this block. |
-| consensusSequenceNumber | string: The ending consensus sequence number for commits in this block. |
-| txMerkleRoot | string: The 64 character hex hash transaction merkle root. |
-| txReceiptRoot | string: The 64 character hex hash receipt merkle root. |
-| stateRoot | string: The 64 character hex hash of the state DB root. |
-| previousHeader | string: The 64 character hex hash of the previous block header. |
-| status | integer: The enum status of the block (0 = Unknown, 3 = Pending, 4 = Finalized) |
+<ApiSchema pointer="#/definitions/BlockHeader" />
 
 Every Block Header contains three Merkle Root Hashes, which correspond to the
 Transaction Merkle Tree, the Receipt Merkle Tree, and the State DB Merkle Tree.

@@ -1,3 +1,5 @@
+import ApiSchema from '@theme/ApiSchema';
+
 # Storage
 
 Data is stored by Mazzaroth in a couple of ways. The Mazzaroth Ledger
@@ -65,7 +67,7 @@ efficient and secure verification of the data that it stores.
 For an example of how this is used in Mazzaroth take a look at the fields of a
 Block Header.
 
-!INCLUDE "definitions/BlockHeader.md", 2
+<ApiSchema pointer="#/definitions/BlockHeader" />
 
 Every Block Header contains three Merkle Root Hashes, which correspond to the
 Transaction Merkle Tree, the Receipt Merkle Tree, and the State DB Merkle Tree.

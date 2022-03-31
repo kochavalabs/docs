@@ -1,3 +1,5 @@
+import ApiSchema from '@theme/ApiSchema';
+
 # Blockchain
 
 ## Smart Contracts
@@ -65,25 +67,7 @@ header hash. Each block includes the hash of the previous block header, which
 links the two and forms the block chain. See below for a complete list of
 fields stored in a Block and Block Header Object along with their description.
 
-#### Block Object
-
-| Field | Value |
-|-------|-------|
-| header | object: The [Block Header Object](#Block-Header-Object). |
-| transactions | array of objects: The list of transaction objects in this block. |
-
-#### Block Header Object
-
-| Field | Value |
-|-------|-------|
-| blockHeight | string: The height of this block in the ledger, which starts at block height 0. |
-| transactionHeight | string: The highest transaction number stored in this block. |
-| consensusSequenceNumber | string: The ending consensus sequence number for commits in this block. |
-| txMerkleRoot | string: The 64 character hex hash transaction merkle root. |
-| txReceiptRoot | string: The 64 character hex hash receipt merkle root. |
-| stateRoot | string: The 64 character hex hash of the state DB root. |
-| previousHeader | string: The 64 character hex hash of the previous block header. |
-| status | integer: The enum status of the block (0 = Unknown, 3 = Pending, 4 = Finalized) |
+<ApiSchema pointer="#/definitions/Block" />
 
 ### Transactions
 
@@ -100,46 +84,7 @@ It must be signed by either the sending account owner or an
 authorized signer for an account. See below for a list of the fields and
 descriptions stored in a Transaction Object.
 
-#### Transaction Object
-
-| Field | Value |
-|-------|-------|
-| signature | string: The 128 character hex representation of a 64 byte Ed25519 signature created by signing the action XDR object. |
-| sender | string: The 64 character hex representation of a 32 byte Ed25519 public key of the sender for the transaction. |
-| data | object: The [Data Object](#Data-Object). |
-
-#### Data Object
-
-| Field | Value |
-|-------|-------|
-| channelID | string: The 64 character hex representation of a 32 byte channel id, which is the target of the transaction. |
-| nonce | integer: A random nonce value which is used to allow similar transactions to be processed without being marked duplicate. |
-| blockExpirationNumber | integer: The highest block number in which to accept this transaction. Used to expire outdated transactions. |
-| category | object: The [Category object](#Category-Object). |
-
-#### Category Object
-
-| Field | Value |
-|-------|-------|
-| enum | integer: Describes which object is stored in the value field (0 = None, 1 = Call (call), 2 = Deploy (contract), 3 = Pause (bool), 4 = Delete (void)) |
-| value | object: The object which matches the enum value field 1= ([Call](#Call-Object), 2 = [Contract](#Contract-Object)), 3 = boolean, or 4 = void. |
-
-#### Call Object
-
-| Field | Value |
-|-------|-------|
-| function | string: The name of the function on the stored contract to execute. |
-| parameters | array of strings: JSON arguments to provide to the function. Decoded during Wasm execution to be passed as arguments to the function call. |
-
-#### Contract Object
-
-| Field | Value |
-|-------|-------|
-| owner | string: The 64 character hex representation of a 32 byte Ed25519 public key of the owner for the contract. |
-| abi | object: The [ABI Object](#ABI-Object) that defines the functions of the contract. |
-| contractBytes | string: Base64 encoded Wasm binary contract to deploy. |
-| contractHash  | string: Sha3 256 Hash of the contract bytes, verified on execution. |
-| version       | string: The Semver version number of the contract. Must be updated for each unique deploy. |
+<ApiSchema pointer="#/definitions/Transaction" />
 
 #### Contract
 
@@ -185,15 +130,7 @@ Receipts for every transaction that is accepted by Consensus are stored, along
 with the transaction itself, in the ledger. Receipts may be looked up by the
 Transaction ID use the Mazzaroth RPC API on a Readonly node.
 
-#### Receipt Object
-
-| Field | Value |
-|-------|-------|
-| transactionID | string: The ID (64 character hex hash) of the transaction for this receipt. |
-| status | integer: The enum status of the transaction execution (0 = Unknown, 1 = Success, 2 = Failure) |
-| stateRoot | string: The 64 character hex hash of the state DB root after transaction execution. |
-| statusInfo | string: Max length 256 char string with some information about the transaction status. |
-| result | string: The JSON return value from the transaction execution. |
+<ApiSchema pointer="#/definitions/Receipt" />
 
 ## State Database
 

@@ -1,3 +1,5 @@
+import ApiSchema from '@theme/ApiSchema';
+
 # Blockchain
 
 ## Smart Contracts
@@ -65,7 +67,7 @@ header hash. Each block includes the hash of the previous block header, which
 links the two and forms the block chain. See below for a complete list of
 fields stored in a Block and Block Header Object along with their description.
 
-!INCLUDE "definitions/Block.md", 3
+<ApiSchema pointer="#/definitions/Block" />
 
 ### Transactions
 
@@ -82,7 +84,7 @@ It must be signed by either the sending account owner or an
 authorized signer for an account. See below for a list of the fields and
 descriptions stored in a Transaction Object.
 
-!INCLUDE "definitions/Transaction.md", 3
+<ApiSchema pointer="#/definitions/Transaction" />
 
 #### Contract
 
@@ -128,7 +130,7 @@ Receipts for every transaction that is accepted by Consensus are stored, along
 with the transaction itself, in the ledger. Receipts may be looked up by the
 Transaction ID use the Mazzaroth RPC API on a Readonly node.
 
-!INCLUDE "definitions/Receipt.md", 3
+<ApiSchema pointer="#/definitions/Receipt" />
 
 ## State Database
 
