@@ -43,8 +43,8 @@ const config = {
         theme: {
           primaryColor: '#e3bd2d',
           options: { // https://github.com/Redocly/redoc#redoc-options-object
-            disableSearch: true
-            // scrollYOffset: 60
+            disableSearch: true,
+            scrollYOffset: 60
           },
         }
       },
