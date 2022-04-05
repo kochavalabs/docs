@@ -27,7 +27,7 @@ or a single [standalone](#Standalone-Node) node.
 ### Consensus Network
 
 To run a consensus network you will need at least four Consensus Nodes
-and a single Readonly node configured to connect to each other.
+and a single Gateway node configured to connect to each other.
 
 Currently, these node types have not been released for public use.
 Documentation will be updated when these are made available.
@@ -51,12 +51,12 @@ can be provided as command line arguments to the start standalone command.
 Example:
 
 ```Bash
-docker run -p 6299:6299 --mount type=bind,src=/data,dst=/data kochavalabs/mazzaroth:latest start standalone --channel_id 0000000000000000000000000000000000000000000000000000000000000000
+docker run -p 6299:6299 --mount type=bind,src=/data,dst=/data kochavalabs/mazzaroth:latest start standalone --channel.id 0000000000000000000000000000000000000000000000000000000000000000
 ```
 
 ## Upload a Contract
 
-Once you have a Readonly or Standalone node running you may upload
+Once you have a Gateway or Standalone node running you may upload
 a contract to the channel by submitting a Deploy type Transaction.
 
 This transaction includes the WebAssembly contract bytes and ABI and initializes

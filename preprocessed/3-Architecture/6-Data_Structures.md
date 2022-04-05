@@ -27,7 +27,7 @@ against faulty nodes while allowing a distributed network to reach consensus.
 - [PBFT White Paper](http://pmg.csail.mit.edu/papers/osdi99.pdf)
 
 Nodes may join a channel as a Consensus node in order to participate in the
-consensus protocol. Readonly nodes in a channel will take incoming transactions
+consensus protocol. Gateway nodes in a channel will take incoming transactions
 from clients and submit them to a consensus node to have the transaction ordered
 and executed. The consensus may batch a number of transactions in a single
 request round to reduce the number of consensus messages that are needed to
@@ -45,7 +45,7 @@ There are currently 3 types of nodes:
 
 - [Standalone](#Standalone-Node) nodes are useful for development, but do not connect
 to the distributed network of consensus nodes.
-- [Readonly](#Readonly-Node) nodes provide users with access to the blockchain through
+- [Gateway](#Geadonly-Node) nodes provide users with access to the blockchain through
 RPCs but do not participate in consensus.
 - [Consensus](#Consensus-Node) nodes participate in a channel's consensus to facilitate
 ordering and execution of transactions.
@@ -56,10 +56,10 @@ A standalone node can be used as a development environment for Mazzaroth.
 It provides a way to deploy and interact with a smart contract without
 needing a network of nodes.
 
-### Readonly Node
+### Gateway Node
 
-A readonly node is connected to the network but does not participate in consensus.
-The main role of a readonly node is to allow clients to send requests to the channel
+A gateway node is connected to the network but does not participate in consensus.
+The main role of a gateway node is to allow clients to send requests to the channel
 including submitting transactions and requesting information from the ledger or state.
 
 ### Consensus Node
@@ -67,7 +67,7 @@ including submitting transactions and requesting information from the ledger or 
 A consensus node is connected to the network and participates in
 the consensus that accepts transactions into the channel.
 A consensus node does not allow requests from clients,
-but does receive forwarded transactions from other readonly nodes in the network.
+but does receive forwarded transactions from other gateway nodes in the network.
 
 ## Peer to Peer
 
@@ -88,9 +88,9 @@ of the network in order to join.
 
 ### Distributed Ledger
 
-Each type of node (readonly or consensus) will keep a record of transactions
+Each type of node (gateway or consensus) will keep a record of transactions
 that have been executed along with receipts in its Ledger.
-Consensus and Readonly nodes communicate to each other using a p2p protocol
+Consensus and Gateway nodes communicate to each other using a p2p protocol
 backed by the membership to make sure transactions are propagated to all nodes
 in the network. With Consensus ordering we ensure that the ledger of each node
 participating in the network will match for a given height.

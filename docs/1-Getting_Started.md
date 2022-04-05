@@ -52,18 +52,18 @@ There are currently 3 types of nodes available to be deployed:
 
 - [Standalone](#Standalone) nodes are useful for development, but do not connect
 to the distributed network of consensus nodes.
-- [Readonly](#Readonly) nodes provide users with access to the blockchain
+- [Gateway](#Gateway) nodes provide users with access to the blockchain
 through RPCs but do not participate in consensus.
 - [Consensus](#Consensus) nodes participate in a channel's consensus to
 facilitate ordering and execution of transactions.
 
-The command to start a node is `mazzaroth start` followed by the type.
+The command to start a node is `mazzaroth node start` followed by the type.
 Command line flags may also be provided to override default config values or
 you can use a config yaml file. For example, to start a standalone node with
 a config file you can use the following command:
 
 ```Bash
-mazzaroth start standalone --cfg-path my-config.yaml
+mazzaroth node start standalone --cfg-path my-config.yaml
 ```
 
 For the GCP standalone solution a systemd service is already setup and all that
@@ -76,10 +76,10 @@ A standalone node can be used as a development environment for Mazzaroth.
 It provides a way to deploy and interact with a smart contract without
 connecting to the global network of nodes.
 
-### Readonly
+### Gateway
 
-A readonly node is connected to the network but does not participate in consensus.
-The main role of a readonly node is to allow clients to send requests to the
+A gateway node is connected to the network but does not participate in consensus.
+The main role of a gateway node is to allow clients to send requests to the
 channel including submitting transactions and requesting information from
 the ledger or state.
 
@@ -88,12 +88,12 @@ the ledger or state.
 A consensus node is connected to the network and participates in the consensus
 that accepts transactions into the channel. A consensus node does not allow
 requests from clients, but does receive forwarded transactions from other
-readonly nodes in the network.
+gateway nodes in the network.
 
 ## Interacting with a Node
 
 This guide will walk you through interacting with a Mazzaroth node.
-Standalone and Readonly nodes use HTTP to handle requests and can be used to
+Standalone and Gateway nodes use HTTP to handle requests and can be used to
 deploy contracts, submit transactions, or lookup information from the ledger.
 
 [m8](https://github.com/kochavalabs/m8) is a command line tool

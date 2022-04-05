@@ -29,22 +29,22 @@ The basic steps of a Transaction's lifecycle in Mazzaroth are as follows:
 A transaction is created by a user and is signed by their account or an authorized
 account for the sender of the transaction.
 
-The transactions are submitted to a Readonly Node in the targeted network using the
+The transactions are submitted to a Gateway Node in the targeted network using the
 `transactions` RPC API endpoint.
 
-The Readonly Node performs some basic validation, such as checking that the Transaction
+The Gateway Node performs some basic validation, such as checking that the Transaction
 is properly signed and includes the proper channel ID. If the Validation succeeds
-the Readonly Node will send the Transaction to a Consensus node in the network and
+the Gateway Node will send the Transaction to a Consensus node in the network and
 return the Transaction ID in the submit response.
 
-When a Consensus Node receives a Transaction from a Readonly Node it performs similar
+When a Consensus Node receives a Transaction from a Gateway Node it performs similar
 validation on the signature and channel ID, then submits the transaction to the Consensus
 protocol. The participating Consensus nodes use a form of the Practical Byzantine
 Fault Tolerance (PBFT) consensus protocol to order the transactions that have been
 submitted. Once ordering has finalized each Consensus Node will execute the transaction,
-update the ledgers, and gossip the transaction back to Readonly Nodes.
+update the ledgers, and gossip the transaction back to Gateway Nodes.
 
-Readonly Nodes that receive transactions from Consensus will queue the transactions
+Gateway Nodes that receive transactions from Consensus will queue the transactions
 to ensure that they are executed in the correct order. Once they have the next transactions
 to execute they will execute them and update their own ledgers.
 
@@ -76,7 +76,7 @@ See XDR definition [here](https://github.com/kochavalabs/mazzaroth-xdr/blob/mast
 A transaction contains an action, which gets processed by the
 Mazzaroth Virtual Machine (RothVM) on a channel. This can do things such as
 Update a Contract, Call a Function, or set permissions on an account.
-After a non-readonly transactions has gone through consensus and
+After a write transaction has gone through consensus and
 has been executed within the RothVM it is added to the ledger. Once a
 transaction has been added to the ledger it may be retrieved by using the
 transaction ID which is the unique hash of the Transaction object itself.
@@ -128,7 +128,7 @@ See XDR definition [here](https://github.com/kochavalabs/mazzaroth-xdr/blob/mast
 Receipts are the stored results from the execution of a transaction.
 Receipts for every transaction that is accepted by Consensus are stored, along
 with the transaction itself, in the ledger. Receipts may be looked up by the
-Transaction ID use the Mazzaroth RPC API on a Readonly node.
+Transaction ID use the Mazzaroth RPC API on a Gateway node.
 
 <ApiSchema pointer="#/definitions/Receipt" />
 
@@ -141,8 +141,8 @@ as a result of Transaction execution, such as by updating the Contract store in 
 or by executing a contract function that stores a value. The Merkle root of the
 State DB is stored in block headers when blocks are finalized.
 
-There are a number of different items that are stored in the StateDB including Accounts,
-the Contract binary, the Channel Config, and general Contract State.
+There are a number of different items that are stored in the StateDB including
+the Contract binary and general Contract State.
 
 ### Contract State
 

@@ -56,7 +56,7 @@ Use "mazzaroth [command] --help" for more information about a command.
 
 Mazzaroth arguments and flags can be provided with the command to docker run.
 For example, to get a listing of all of the available flags and descriptions for
-the Mazzaroth start standalone command use:
+the Mazzaroth node start standalone command use:
 
 ```Bash
 docker run kochavalabs/mazzaroth node start standalone --help
@@ -82,7 +82,7 @@ docker run -p 6299:6299 kochavalabs/mazzaroth node start standalone
 Providing a configured http port:
 
 ```Bash
-docker run -p 6300:6300 kochavalabs/mazzaroth node start standalone --http_port 6300
+docker run -p 6300:6300 kochavalabs/mazzaroth node start standalone --node.network.rpc.port 6300
 ```
 
 ### Mounting the Data Directory
