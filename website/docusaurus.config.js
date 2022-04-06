@@ -7,15 +7,15 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Mazzaroth',
-  tagline: 'TODO',
+  tagline: '',
   url: 'https://mazzaroth.io',
-  baseUrl: '/',
+  baseUrl: '/docs/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'kochavalabs', // Usually your GitHub org/user name.
-  projectName: 'Mazzaroth', // Usually your repo name.
-
+  projectName: 'docs', // Usually your repo name.
+  trailingSlash: false,
   presets: [
     [
       'classic',
