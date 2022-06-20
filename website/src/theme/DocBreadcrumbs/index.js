@@ -13,7 +13,7 @@ import {
 import styles from "./styles.module.css";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
-import useBaseUrl from "@docusaurus/useBaseUrl"; // TODO move to design system folder
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
 function BreadcrumbsItemLink({ children, href }) {
   const className = clsx("breadcrumbs__link", styles.breadcrumbsItemLink);
@@ -24,7 +24,7 @@ function BreadcrumbsItemLink({ children, href }) {
   ) : (
     <span className={className}>{children}</span>
   );
-} // TODO move to design system folder
+}
 
 function BreadcrumbsItem({ children, active }) {
   return (
