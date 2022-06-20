@@ -1,57 +1,49 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
-
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #e3bd2d;
-  --ifm-color-primary-dark: #d8b11d;
-  --ifm-color-primary-darker: #cca71b;
-  --ifm-color-primary-darkest: #a88a16;
-  --ifm-color-primary-light: #e6c545;
-  --ifm-color-primary-lighter: #e8c851;
-  --ifm-color-primary-lightest: #edd475;
+  --primary-dark-grey: #353c3b;
+  --primary-gold: #e3bd2d;
+  --secondary-teal-dark: #157d78;
+  --secondary-teal-button: #70efde;
+  --grey-5: #f5f6f6;
+  --dark-grey-2: #3f4746;
+  --border-radius-lg: 8px;
+  --border-radius: 4px;
+  --ifm-font-color-base: var(--primary-dark-grey);
+  --ifm-color-primary: var(--secondary-teal-dark);
   --ifm-code-font-size: 95%;
-
-  --ifm-blockquote-color: #edd475;
-  --ifm-blockquote-color-dark: #a88a16;
+  --ifm-background-color: var(--grey-5);
+  --ifm-background-surface-color: var(--primary-dark-grey);
+  --ifm-footer-background-color: var(--primary-dark-grey);
+  --ifm-navbar-link-color: var(--grey-5);
+  --ifm-breadcrumb-border-radius: var(--border-radius-lg);
+  --ifm-global-shadow-lw: none;
+  --ifm-code-background: white;
+  --ifm-navbar-link-hover-color: var(--primary-gold);
+  --ifm-font-family-base: "Noto Sans JP";
+  --ifm-heading-font-weight: 400;
+  --ifm-navbar-height: 80px;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #e3bd2d;
-  --ifm-color-primary-dark: #d8b11d;
-  --ifm-color-primary-darker: #cca71b;
-  --ifm-color-primary-darkest: #a88a16;
-  --ifm-color-primary-light: #e6c545;
-  --ifm-color-primary-lighter: #e8c851;
-  --ifm-color-primary-lightest: #edd475;
+html[data-theme="dark"] {
+  --ifm-font-color-base: var(--grey-5);
+  --ifm-background-surface-color: var(--primary-dark-grey);
+  --ifm-color-primary: var(--secondary-teal-button);
+  --ifm-menu-color-active: var(--secondary-teal-button);
+  --ifm-background-color: var(--dark-grey-2);
+  --ifm-code-background: var(--primary-dark-grey);
+  --ifm-hover-overlay: var(--primary-dark-grey);
 }
 
-.docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.1);
-  display: block;
-  margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
+.footer--dark {
+  --ifm-footer-background-color: var(--primary-dark-grey);
 }
-
-[data-theme='dark'] .docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.3);
+.navbar__logo {
+  height: 40px;
 }
-
-.style-guide details,
-details.detailed-explanation {
-  background-color: var(--ifm-blockquote-color);
-  margin: 0.25rem 0;
-  padding: 0.5rem 0.5rem;
-  border-radius: var(--ifm-global-radius);
+.menu__link,
+.menu__caret {
+  border-radius: var(--border-radius-lg);
 }
-
-[data-theme='dark'] details.detailed-explanation {
-  background-color: var(--ifm-blockquote-color-dark);
-  margin: 0.25rem 0;
-  padding: 0.5rem 0.5rem;
-  border-radius: var(--ifm-global-radius);
+.toggleButton_node_modules-\@docusaurus-theme-classic-lib-next-theme-ColorModeToggle-styles-module {
+  color: var(--grey-5);
 }
