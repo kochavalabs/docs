@@ -48,6 +48,3 @@ html[data-theme="dark"] {
 .menu__caret {
   border-radius: var(--border-radius-lg);
 }
-.toggleButton_node_modules-\@docusaurus-theme-classic-lib-next-theme-ColorModeToggle-styles-module {
-  color: var(--grey-5);
-}
