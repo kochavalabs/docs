@@ -34,6 +34,10 @@ html[data-theme="dark"] {
   --ifm-hover-overlay: var(--primary-dark-grey);
 }
 
+.redocusaurus pre {
+  --ifm-background-color: initial;
+}
+
 .footer--dark {
   --ifm-footer-background-color: var(--primary-dark-grey);
 }
